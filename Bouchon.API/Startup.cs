@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.Owin;
+using Microsoft.Owin.Cors;
+using Owin;
 using System.Web.Http;
 
-[assembly: OwinStartup(typeof(Annufal.Startup))]
+[assembly: OwinStartup(typeof(Bouchon.API.Startup))]
 
 namespace Bouchon.API
 {
@@ -14,12 +13,12 @@ namespace Bouchon.API
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            AuthConfig.Config(app);
-
             WebApiConfig.Register(config);
             app.UseCors(CorsOptions.AllowAll); //Allow CORS for API
 
             IocConfig.Config(app, config);
+
+            AuthConfig.Config(app);
 
             app.UseWebApi(config);
         }

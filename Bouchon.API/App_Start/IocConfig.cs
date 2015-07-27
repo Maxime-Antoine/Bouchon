@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Bouchon.API.Db;
+using Owin;
+using Postal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,17 +19,22 @@ namespace Bouchon.API
             var builder = new ContainerBuilder();
 
             //register controllers
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); //WebAPI
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()) //Register ***Services
                    .Where(t => t.Name.EndsWith("Service"))
                    .AsImplementedInterfaces();
 
+            //Register generics
+            builder.RegisterGeneric(typeof(Repository<>)).AsImplementedInterfaces();
+
+            // Register dependecy of MailerApiController from Postal dll
+            builder.RegisterType<EmailService>().As<IEmailService>();
+
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container); //WebAPI
 
             app.UseAutofacMiddleware(container); //Register before MVC / WebApi
-            app.UseAutofacMvc();
             app.UseAutofacWebApi(config);
         }
     }

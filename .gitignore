@@ -1,3 +1,5 @@
 /Bouchon.API/bin
 /Bouchon.API/obj
 /packages
+/Bouchon.Web/obj
+/Bouchon.Web/bin

@@ -6,9 +6,28 @@
             .when('/', {
                 templateUrl: 'App/Views/home.html'
             })
+            .when('/display-message/:msg', {
+                templateUrl: 'App/Views/display-message.html',
+                controller: 'displayMessageCtrl'
+            })
             .when('/register', {
                 controller: 'registerCtrl',
                 templateUrl: 'App/Views/register.html'
+            })
+            .when('/login', {
+                templateUrl: 'App/Views/login-page.html'
+            })
+            .when('/request', {
+                templateUrl: 'App/Views/post-request.html'
+            })
+            .when('/trip', {
+                templateUrl: 'App/Views/post-trip.html'
+            })
+            .when('/browse', {
+                templateUrl: 'App/Views/browse.html'
+            })
+            .when('/inbox', {
+                templateUrl: 'App/Views/inbox.html'
             })
             //.when('/display-message/:msg', {
             //    templateUrl: 'Templates/display-message.html',

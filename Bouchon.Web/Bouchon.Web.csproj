@@ -61,8 +61,14 @@
     <Content Include="App\app.components.menu.js" />
     <Content Include="App\app.js" />
     <Content Include="App\app.routes.js" />
+    <Content Include="App\Views\browse.html" />
+    <Content Include="App\Views\display-message.html" />
     <Content Include="App\Views\home.html" />
-    <Content Include="App\Views\login.html" />
+    <Content Include="App\Views\inbox.html" />
+    <Content Include="App\Views\login-page.html" />
+    <Content Include="App\Views\login-form.html" />
+    <Content Include="App\Views\post-request.html" />
+    <Content Include="App\Views\post-trip.html" />
     <Content Include="App\Views\register.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -87,6 +93,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App\app.auth.js" />
+    <Content Include="App\app.controllers.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

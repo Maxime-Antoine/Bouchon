@@ -5,7 +5,7 @@
 	app.directive('loginForm', function () {
 		return {
 			restrict: 'EA',
-			templateUrl: 'App/Views/login.html',
+			templateUrl: 'App/Views/login-form.html',
 			controller: ['$scope', '$location', '$http', '$timeout', 'authSvc', 'API_TOKEN_URL', 'API_URL',
 				function ($scope, $location, $http, $timeout, authSvc, API_TOKEN_URL, API_URL) {
 					$scope.input = {};

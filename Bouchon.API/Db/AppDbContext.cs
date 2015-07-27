@@ -1,4 +1,5 @@
 ﻿using Bouchon.API.Authentication;
+using Bouchon.API.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,8 @@ namespace Bouchon.API.Db
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Migrations.Configuration>());
         }
 
-        public static AppDbContext Create()
-        {
-            return new AppDbContext();
-        }
+        public DbSet<Trip> Trips { get; set; }
+
+        public DbSet<Request> Requests { get; set; }
     }
 }

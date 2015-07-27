@@ -3,3 +3,5 @@
 /packages
 /Bouchon.Web/obj
 /Bouchon.Web/bin
+/Bouchon.API.Tests/obj
+/Bouchon.API.Tests/bin

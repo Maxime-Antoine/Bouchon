@@ -23,9 +23,23 @@ namespace Bouchon.API.Authentication
                    {
                        new Claim(Constants.ClaimTypes.GivenName, "Maxime"),
                        new Claim(Constants.ClaimTypes.FamilyName, "Antoine"),
+                       new Claim("name", "Max"),
                        new Claim(Constants.ClaimTypes.Role, "Geek"),
                        new Claim(Constants.ClaimTypes.Role, "Foo")
                    }
+               },
+               new InMemoryUser
+               {
+                    Username = "Max2",
+                    Password = "password",
+                    Subject = "2",
+                    Claims = new[]
+                    {
+                        new Claim(Constants.ClaimTypes.GivenName, "Maxime"),
+                        new Claim(Constants.ClaimTypes.FamilyName, "Antoine"),
+                        new Claim(Constants.ClaimTypes.Name, "Max2"),
+                        new Claim(Constants.ClaimTypes.Role, "Foo")
+                    }
                }
            };
        }

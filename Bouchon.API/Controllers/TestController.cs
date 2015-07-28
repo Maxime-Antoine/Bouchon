@@ -11,7 +11,7 @@ namespace Bouchon.API.Controllers
     [RoutePrefix("api")]
     public class TestController : ApiController
     {
-        [Authorize]
+        [Authorize(Roles="Foo")]
         [Route("test")]
         public IHttpActionResult Get()
         {

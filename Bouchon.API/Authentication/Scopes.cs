@@ -17,10 +17,11 @@ namespace Bouchon.API.Authentication
                     Enabled = true,
                     Name = "api",
                     Type = ScopeType.Resource,
+                    IncludeAllClaimsForUser = true,
                     Claims = new List<ScopeClaim>
                     {
-                        new ScopeClaim("role")
-
+                        new ScopeClaim("role"),
+                        new ScopeClaim("name")
                     }
                 }
             };

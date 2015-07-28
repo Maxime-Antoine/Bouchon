@@ -12,19 +12,33 @@
 
 					$scope.login = function () {
 						if (!$scope.input.username)
-							$scope.showMsg('error', 'Login vide', 5000);
+							$scope.showMsg('error', 'Login required', 5000);
 						else if (!$scope.input.password)
-							$scope.showMsg('error', 'Password vide', 5000);
+							$scope.showMsg('error', 'Password required', 5000);
 						else
-							$http.post(API_TOKEN_URL, $.param({
-								grant_type: 'password',
-								userName: $scope.input.username,
-								password: $scope.input.password
-							})).success(function (data) {
-								$location.path('/');
-							}).error(function (data) {
-								$scope.showMsg('error', data.error_description, 5000);
-							});
+						{
+						    var req = {
+						        method: 'POST',
+						        url: API_TOKEN_URL,
+						        headers: {
+						            'Content-Type': 'application/x-www-form-urlencoded'
+						        },
+						        data: $.param({
+						            grant_type: 'password',
+						            scope: 'api',
+						            userName: $scope.input.username,
+						            password: $scope.input.password,
+						            client_id: 'bouchon.website',
+						            client_secret: '1a2a4b72-dda2-4dc8-94df-77f5ef7a84b2'
+						        })
+						    };
+
+						    $http(req).success(function (data) {
+						        $location.path('/');
+						    }).error(function (data) {
+						        $scope.showMsg('error', data.error_description, 5000);
+						    });
+						}
 					};
 
 					$scope.logout = function () {
@@ -48,14 +62,14 @@
 
 					$scope.resetPwd = function () {
 						if (!$scope.input.username) {
-							$scope.showMsg('error', "Nom d'utilisateur vide", 5000);
+							$scope.showMsg('error', "Login required", 5000);
 						} else {
 							$http.get(API_URL + 'account/resetPassword/' + $scope.input.username)
 								 .success(function (data) {
-									 $scope.showMsg('info', "Un email a ete envoye", 5000);
+									 $scope.showMsg('info', "An email has been sent", 5000);
 								 })
 								 .error(function (data) {
-									 $scope.showMsg('error', "Utilisateur inconnu", 5000);
+									 $scope.showMsg('error', "Unknown user", 5000);
 								 });
 						}
 					};

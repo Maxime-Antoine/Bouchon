@@ -18,16 +18,25 @@
                 templateUrl: 'App/Views/login-page.html'
             })
             .when('/request', {
-                templateUrl: 'App/Views/post-request.html'
+                templateUrl: 'App/Views/post-request.html',
+                access: {
+                    requiresLogin: true
+                }
             })
             .when('/trip', {
-                templateUrl: 'App/Views/post-trip.html'
+                templateUrl: 'App/Views/post-trip.html',
+                access: {
+                    requiresLogin: true
+                }
             })
             .when('/browse', {
                 templateUrl: 'App/Views/browse.html'
             })
             .when('/inbox', {
-                templateUrl: 'App/Views/inbox.html'
+                templateUrl: 'App/Views/inbox.html',
+                access: {
+                    requiresLogin: true
+                }
             })
             //.when('/display-message/:msg', {
             //    templateUrl: 'Templates/display-message.html',

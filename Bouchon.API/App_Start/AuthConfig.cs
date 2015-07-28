@@ -16,7 +16,7 @@ namespace Bouchon.API
                     idsrvApp.UseIdentityServer(new IdentityServerOptions
                         {
                             SiteName = "Embedded IdentityServer",
-                            //SigningCertificate = LoadCertificate(),
+                            SigningCertificate = LoadCertificate(),
                             Factory = InMemoryFactory.Create(
                                 users: Users.Get(),
                                 clients: Clients.Get(),
@@ -29,7 +29,14 @@ namespace Bouchon.API
 
         private static X509Certificate2 LoadCertificate()
         {
-            return new X509Certificate2();
+            var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly);
+
+            foreach (var cert in store.Certificates)
+                if (cert.FriendlyName == "Development Certificate")
+                    return cert;
+
+            throw new Exception("Dev SSL certificate not found !");
         }
     }
 }

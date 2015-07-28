@@ -8,9 +8,9 @@ namespace Bouchon.API.Db
 {
     public interface IRepository<T> where T : class
     {
-        Task<bool> Add(T entity);
+        Task<T> Add(T entity);
 
-        Task<bool> Delete(int id);
+        Task Delete(int id);
 
         Task<IEnumerable<T>> GetAll();
 
@@ -18,6 +18,6 @@ namespace Bouchon.API.Db
 
         IQueryable<T> Query();
 
-        Task<bool> Update(T entity);
+        Task Update(T entity);
     }
 }

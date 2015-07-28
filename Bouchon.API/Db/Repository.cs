@@ -25,18 +25,19 @@ namespace Bouchon.API.Db
             }
         }
 
-        public async Task<bool> Add(T entity)
+        public async Task<T> Add(T entity)
         {
+            T createdEntity;
             using (var db = new AppDbContext())
             {
-                db.Set<T>().Add(entity);
+                createdEntity = db.Set<T>().Add(entity);
                 await db.SaveChangesAsync();
             }
 
-            return true;
+            return createdEntity;
         }
 
-        public async Task<bool> Update(T entity)
+        public async Task Update(T entity)
         {
             using (var db = new AppDbContext())
             {
@@ -44,11 +45,9 @@ namespace Bouchon.API.Db
                 db.Entry(entity).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
-
-            return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task Delete(int id)
         {
             using (var db = new AppDbContext())
             {
@@ -57,8 +56,6 @@ namespace Bouchon.API.Db
                 dbSet.Remove(entity);
                 await db.SaveChangesAsync();
             }
-
-            return true;
         }
 
         public IQueryable<T> Query()

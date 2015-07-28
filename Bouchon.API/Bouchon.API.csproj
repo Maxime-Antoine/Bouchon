@@ -247,19 +247,30 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\ApplicationRoleManager.cs" />
+    <Compile Include="Authentication\ApplicationUserManager.cs" />
+    <Compile Include="Authentication\AuthMailService.cs" />
     <Compile Include="Authentication\Clients.cs" />
     <Compile Include="Authentication\Scopes.cs" />
     <Compile Include="Authentication\Users.cs" />
+    <Compile Include="BindingModels\ChangePasswordBindingModel.cs" />
+    <Compile Include="BindingModels\CreateRoleBindingModel.cs" />
+    <Compile Include="BindingModels\CreateUserBindingModel.cs" />
     <Compile Include="BindingModels\RequestBindingModel.cs" />
     <Compile Include="BindingModels\TripBindingModel.cs" />
+    <Compile Include="BindingModels\UsersInRoleModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrudApiController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Db\AppDbContext.cs" />
     <Compile Include="Db\IRepository.cs" />
@@ -268,6 +279,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Db\Migrations\Configuration.cs" />
+    <Compile Include="Authentication\ApplicationUser.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,13 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Bouchon.API.Authentication;
 using Bouchon.API.Db;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Owin;
 using Postal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 using System.Reflection;
-using System.Web;
 using System.Web.Http;
 
 namespace Bouchon.API
@@ -24,6 +23,13 @@ namespace Bouchon.API
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()) //Register ***Services
                    .Where(t => t.Name.EndsWith("Service"))
                    .AsImplementedInterfaces();
+
+            //Register Auth classes
+            builder.RegisterType<AppDbContext>().As<DbContext>().InstancePerRequest();
+            builder.RegisterType<UserStore<ApplicationUser>>().AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<RoleStore<IdentityRole>>().AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterType<ApplicationRoleManager>().AsSelf().InstancePerRequest();
 
             //Register generics
             builder.RegisterGeneric(typeof(Repository<>)).AsImplementedInterfaces();

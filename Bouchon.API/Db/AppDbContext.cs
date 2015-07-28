@@ -2,14 +2,11 @@
 using Bouchon.API.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace Bouchon.API.Db
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext()
             : base("AppDb")
@@ -20,5 +17,13 @@ namespace Bouchon.API.Db
         public DbSet<Trip> Trips { get; set; }
 
         public DbSet<Request> Requests { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Properties<DateTime>()
+                        .Configure(c => c.HasColumnType("datetime2"));
+        }
     }
 }

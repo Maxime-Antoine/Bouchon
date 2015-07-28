@@ -1,9 +1,10 @@
 namespace Bouchon.API.Db.Migrations
 {
+    using Bouchon.API.Authentication;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Bouchon.API.Db.AppDbContext>
     {
@@ -12,11 +13,11 @@ namespace Bouchon.API.Db.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Bouchon.API.Db.AppDbContext context)
+        protected override void Seed(AppDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data. E.g.
             //
             //    context.People.AddOrUpdate(
@@ -26,6 +27,25 @@ namespace Bouchon.API.Db.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context));
+
+            var user = new ApplicationUser
+            {
+                UserName = "root",
+                Email = "maxime.antoine2@gmail.com",
+                EmailConfirmed = true,
+                FirstName = "Super",
+                LastName = "Admin",
+                Level = 1,
+                JoinDate = DateTime.Now.AddYears(-3)
+            };
+
+            manager.Create(user, "Super@dmin42");
+            roleManager.Create(new IdentityRole { Name = "Admin" });
+            var rootUser = manager.FindByName(user.UserName);
+            manager.AddToRole(rootUser.Id, "Admin");
         }
     }
 }
